@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class StoriesViewController: UIViewController {
   
-  var tableDetailArr = [TableObjectClass]()
+  var storyDetailArray = [Stories]()
   let tableView = UITableView()
 
   override func viewDidLoad() {
@@ -30,21 +30,22 @@ class ViewController: UIViewController {
     tableView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
     tableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
     tableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
-    tableView.register(TableViewCell.self, forCellReuseIdentifier: Constants.cellId)
-    gettableDetail()
+    tableView.register(StoriesTableViewCell.self, forCellReuseIdentifier: Constants.storiesCellId)
+    getStoryDetail()
   }
   
-  func gettableDetail() {
-    API.getInstance.getTableContent() { (error, response) in
+  func getStoryDetail() {
+    API.getInstance.getStoryDetails() { (error, response) in
       if error == ErrorCode.success {
-        let tableDetail = response["tableContent"] as! [String: AnyObject]
-        self.tableDetailArr = tableDetail["detail"] as! [TableObjectClass]
+        let storyDetail = response["tableContent"] as! [String: AnyObject]
+        self.storyDetailArray = storyDetail["detail"] as! [Stories]
         DispatchQueue.main.async {
-          self.navigationController?.navigationBar.topItem?.title = tableDetail["title"] as? String
+          self.navigationController?.navigationBar.topItem?.title = storyDetail[Constants.title] as? String
           self.tableView.reloadData()
         }
         self.readImage()
       } else {
+        //DISPLAYS DYNAMIC ERROR MESSAGE COMING FROM API CLASS
         let error = response["error"] as? String
         self.showErrorAlert(error: error!)
       }
@@ -52,13 +53,13 @@ class ViewController: UIViewController {
   }
   
   func readImage(){
-    for index in 0...tableDetailArr.count-1{
-      let tableContent = tableDetailArr[index]
+    for index in 0...storyDetailArray.count-1{
+      let tableContent = storyDetailArray[index]
       if let imageURL = URL(string: tableContent.tableImageURL){
         API.getInstance.getDataFromUrl(url: imageURL){ data,response,error in
           guard let data = data, error == nil else { return () }
           if let image = UIImage(data: data) {
-            self.tableDetailArr[index].tableImage = image
+            self.storyDetailArray[index].tableImage = image
             let indexPath = IndexPath(row: index, section: 0)
             DispatchQueue.main.async {
               self.tableView.reloadRows(at: [indexPath], with: .none)
@@ -78,18 +79,18 @@ class ViewController: UIViewController {
   }
   
   @objc func refreshButtonTap(sender: UIButton) {
-    gettableDetail()
+    getStoryDetail()
   }
 }
 
-extension ViewController:UITableViewDelegate,UITableViewDataSource{
+extension StoriesViewController:UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tableDetailArr.count
+    return storyDetailArray.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellId, for: indexPath) as! TableViewCell
-    let details = tableDetailArr[indexPath.row]
+    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.storiesCellId, for: indexPath) as! StoriesTableViewCell
+    let details = storyDetailArray[indexPath.row]
     cell.tableContent = details
     return cell
   }

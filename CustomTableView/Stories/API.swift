@@ -12,7 +12,7 @@ class API:NSObject,URLSessionDelegate{
   
   static let getInstance = API()
   
-  func createRequest(urlString:String!,completionHandler:@escaping(_ errorCode:ErrorCode, _ response:[String:AnyObject])->()) {
+  func callAPI(urlString:String!,completionHandler:@escaping(_ errorCode:ErrorCode, _ response:[String:AnyObject])->()) {
     
     let requestURL = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
     let urlRequest = URLRequest(url: requestURL, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 60)
@@ -34,38 +34,38 @@ class API:NSObject,URLSessionDelegate{
       }.resume()
   }
   
-  func getTableContent(completionHandler:@escaping(_ errorCode:ErrorCode, _ response: [String:AnyObject]) -> ()) {
+  func getStoryDetails(completionHandler:@escaping(_ errorCode:ErrorCode, _ response: [String:AnyObject]) -> ()) {
     
     let urlString = Constants.urlString
-    self.createRequest(urlString: urlString){(errorMessage, jsonData) in
+    self.callAPI(urlString: urlString){(errorMessage, jsonData) in
       if errorMessage == ErrorCode.success {
         if let result = jsonData["rows"] {
           let resultArray = result as? NSArray
-          var tableDetailArray:[TableObjectClass] = []
-          var tableTitle = String()
-          if let title = jsonData["title"] as? String{
-            tableTitle = title
+          var storyDetailArray:[Stories] = []
+          var title = String()
+          if let titleInfo = jsonData["title"] as? String{
+            title = titleInfo
           }
-          for tableInfo in resultArray!
+          for storyInfo in resultArray!
           {
-            let tableDetail = TableObjectClass()
-            if let title = (tableInfo as AnyObject)["title"] as? String{
-              tableDetail.tableTitle = title
+            let storyDetail = Stories()
+            if let title = (storyInfo as AnyObject)["title"] as? String{
+              storyDetail.tableTitle = title
             }
-            if let description = (tableInfo as AnyObject)["description"] as? String{
-              tableDetail.tableDescription = description
+            if let description = (storyInfo as AnyObject)["description"] as? String{
+              storyDetail.tableDescription = description
             }
-            if let imageURL = (tableInfo as AnyObject)["imageHref"] as? String{
-              tableDetail.tableImageURL = imageURL
+            if let imageURL = (storyInfo as AnyObject)["imageHref"] as? String{
+              storyDetail.tableImageURL = imageURL
             }
-            tableDetailArray.append(tableDetail)
+            storyDetailArray.append(storyDetail)
           }
-          var tableDetails = [String: AnyObject]()
-          tableDetails["title"] = tableTitle as AnyObject
-          tableDetails["detail"] = tableDetailArray as AnyObject
-          completionHandler(ErrorCode.success,["tableContent":tableDetails as AnyObject])
+          var storyDetails = [String: AnyObject]()
+          storyDetails[Constants.title] = title as AnyObject
+          storyDetails["detail"] = storyDetailArray as AnyObject
+          completionHandler(ErrorCode.success,["tableContent":storyDetails as AnyObject])
         } else {
-          completionHandler(ErrorCode.failure, ["error": "msg_ErrorInService" as AnyObject])
+          completionHandler(ErrorCode.failure, ["error": "Unable to process your request.Try again later" as AnyObject])
         }
       } else {
         completionHandler(ErrorCode.failure,["error": jsonData["error"]! as AnyObject])

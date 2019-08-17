@@ -8,9 +8,9 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class StoriesTableViewCell: UITableViewCell {
   
-  var tableContent : TableObjectClass? {
+  var tableContent : Stories? {
     didSet {
       tableImage.image = tableContent?.tableImage
       tableTitle.text = tableContent?.tableTitle

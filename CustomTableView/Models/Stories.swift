@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableObjectClass: NSObject {
+class Stories: NSObject {
   var tableDescription = ""
   var tableImageURL = ""
   var tableTitle = ""

@@ -18,5 +18,6 @@ enum ErrorCode: Int {
 
 class Constants: NSObject {
   static var urlString = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
-  static var cellId = "cellId"
+  static var storiesCellId = "storiesCellId"
+  static var title = "title"
 }
