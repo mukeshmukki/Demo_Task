@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA49315423144C6300FBD669 /* StoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA49315323144C6300FBD669 /* StoryDetailViewController.swift */; };
 		BA9FB9A62301D10C00B1460C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FB9A52301D10C00B1460C /* AppDelegate.swift */; };
 		BA9FB9A82301D10C00B1460C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FB9A72301D10C00B1460C /* StoriesViewController.swift */; };
 		BA9FB9AB2301D10C00B1460C /* Stories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA9FB9A92301D10C00B1460C /* Stories.storyboard */; };
@@ -15,10 +16,13 @@
 		BA9FB9B82301D1E500B1460C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FB9B72301D1E500B1460C /* API.swift */; };
 		BA9FB9BA2301D30400B1460C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FB9B92301D30400B1460C /* Constants.swift */; };
 		BA9FB9BC2301E00400B1460C /* Stories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FB9BB2301E00400B1460C /* Stories.swift */; };
+		BAA4A96C2312FAA8003A5D72 /* StoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4A96B2312FAA8003A5D72 /* StoriesViewModel.swift */; };
+		BAA4A96E23130DE1003A5D72 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4A96D23130DE1003A5D72 /* ActivityIndicator.swift */; };
 		BAE111E823020318006897C6 /* StoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE111E723020318006897C6 /* StoriesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA49315323144C6300FBD669 /* StoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailViewController.swift; sourceTree = "<group>"; };
 		BA9FB9A22301D10C00B1460C /* CustomTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9FB9A52301D10C00B1460C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA9FB9A72301D10C00B1460C /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +33,8 @@
 		BA9FB9B72301D1E500B1460C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA9FB9B92301D30400B1460C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BA9FB9BB2301E00400B1460C /* Stories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stories.swift; sourceTree = "<group>"; };
+		BAA4A96B2312FAA8003A5D72 /* StoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewModel.swift; sourceTree = "<group>"; };
+		BAA4A96D23130DE1003A5D72 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		BAE111E723020318006897C6 /* StoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,6 +49,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA493155231454B600FBD669 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA9FB9BB2301E00400B1460C /* Stories.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA493156231454DA00FBD669 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BAA4A96B2312FAA8003A5D72 /* StoriesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BA4931572314550400FBD669 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BA9FB9A72301D10C00B1460C /* StoriesViewController.swift */,
+				BA49315323144C6300FBD669 /* StoryDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		BA9FB9992301D10C00B1460C = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +97,6 @@
 				BA9FB9AE2301D11B00B1460C /* LaunchScreen.storyboard */,
 				BA9FB9B12301D11B00B1460C /* Info.plist */,
 				BADB41362308287300958CDE /* Stories */,
-				BADB4137230828F300958CDE /* Models */,
 				BADB41382308295200958CDE /* Supporting Files */,
 				BADB41392308298D00958CDE /* Resource */,
 			);
@@ -76,26 +106,21 @@
 		BADB41362308287300958CDE /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				BA493155231454B600FBD669 /* Model */,
+				BA4931572314550400FBD669 /* ViewController */,
+				BA493156231454DA00FBD669 /* ViewModel */,
 				BA9FB9A92301D10C00B1460C /* Stories.storyboard */,
-				BA9FB9A72301D10C00B1460C /* StoriesViewController.swift */,
 				BAE111E723020318006897C6 /* StoriesTableViewCell.swift */,
 				BA9FB9B72301D1E500B1460C /* API.swift */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
 		};
-		BADB4137230828F300958CDE /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				BA9FB9BB2301E00400B1460C /* Stories.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		BADB41382308295200958CDE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				BA9FB9B92301D30400B1460C /* Constants.swift */,
+				BAA4A96D23130DE1003A5D72 /* ActivityIndicator.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -180,8 +205,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9FB9A82301D10C00B1460C /* StoriesViewController.swift in Sources */,
+				BA49315423144C6300FBD669 /* StoryDetailViewController.swift in Sources */,
 				BA9FB9B82301D1E500B1460C /* API.swift in Sources */,
 				BA9FB9BC2301E00400B1460C /* Stories.swift in Sources */,
+				BAA4A96C2312FAA8003A5D72 /* StoriesViewModel.swift in Sources */,
+				BAA4A96E23130DE1003A5D72 /* ActivityIndicator.swift in Sources */,
 				BAE111E823020318006897C6 /* StoriesTableViewCell.swift in Sources */,
 				BA9FB9A62301D10C00B1460C /* AppDelegate.swift in Sources */,
 				BA9FB9BA2301D30400B1460C /* Constants.swift in Sources */,
