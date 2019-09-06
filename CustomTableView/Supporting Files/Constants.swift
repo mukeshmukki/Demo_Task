@@ -20,4 +20,8 @@ class Constants: NSObject {
   static var urlString = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
   static var storiesCellId = "storiesCellId"
   static var title = "title"
+  static var titleFont =  16
+  static var paragraphFont = 14
+  static var animationDuration = 0.5
+  static var spacing = CGFloat(20)
 }

@@ -20,9 +20,6 @@ class StoriesViewController: UIViewController {
   }
   
   func setUpUI(){
-    let refreshItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshButtonTap(sender:)))
-    self.navigationItem.rightBarButtonItem = refreshItem
-    
     view.addSubview(tableView)
     tableView.delegate = self
     tableView.dataSource = self
@@ -99,6 +96,12 @@ extension StoriesViewController:UITableViewDelegate,UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let details = storyModel.storyDetailArray[indexPath.row]
+    let transition:CATransition = CATransition()
+    transition.duration = Constants.animationDuration
+    transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    transition.type = CATransitionType.push
+    transition.subtype = CATransitionSubtype.fromTop
+    self.navigationController!.view.layer.add(transition, forKey: kCATransition)
     let storyDetailVC = storyboard?.instantiateViewController(withIdentifier: "StoryDetail") as! StoryDetailViewController
     storyDetailVC.storyDetail = details
     self.navigationController?.pushViewController(storyDetailVC, animated: false)
